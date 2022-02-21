@@ -22,7 +22,7 @@ class InitialView extends StatelessWidget {
               title: 'Duolingo',
               fontFamily: 'Feather',
               fontColor: featherGreen,
-              fontSize: 75,
+              fontSize: 74,
             ),
             Spacer(),
             Expanded(
