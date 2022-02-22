@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 
 import '../widgets/base_button.dart';
 
-class InitialView extends StatelessWidget {
-  const InitialView({Key? key}) : super(key: key);
+class InitialViewMobile extends StatelessWidget {
+  const InitialViewMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: initialBackground,
       body: Padding(
-        padding: const EdgeInsets.all(48.0),
+        padding: const EdgeInsets.all(25.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,26 +22,26 @@ class InitialView extends StatelessWidget {
               title: 'Duolingo',
               fontFamily: 'Feather',
               fontColor: featherGreen,
-              fontSize: 74,
             ),
-            Spacer(),
+            const Spacer(),
             Expanded(
               child: BaseButton(
                 backgroundColor: buttonGreen,
                 title: 'GET STARTED',
                 borderColor: greenShadow,
                 realBorderColor: buttonGreen,
-                fontColor: fontGreen,
+                fontColor: initialBackground,
                 onPressed: () {},
               ),
             ),
+            const Spacer(),
             Expanded(
               child: BaseButton(
                 backgroundColor: darkestBlue,
                 title: 'I ALREADY HAVE AN ACCOUNT',
                 borderColor: initialGrey,
                 realBorderColor: initialGrey,
-                fontColor: initialBackground,
+                fontColor: fontGreen,
                 onPressed: () {},
               ),
             )

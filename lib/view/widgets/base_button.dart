@@ -1,3 +1,4 @@
+import 'package:duolingo_clone/view/widgets/fitted_text.dart';
 import 'package:flutter/material.dart';
 
 class BaseButton extends StatelessWidget {
@@ -20,52 +21,51 @@ class BaseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = width * 0.125;
+    return LayoutBuilder(builder: (context, constraints) {
+      final width = constraints.maxWidth;
+      final height = width * 0.125;
 
-    return SizedBox(
-      height: height,
-      width: width,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            bottom: 6,
-            child: Container(
+      return SizedBox(
+        width: width * 2,
+        height: height * 2,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned(
+              bottom: 20,
+              child: Container(
+                height: height,
+                width: width,
+                //TODO fix button radius issue
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(38),
+                    color: borderColor),
+              ),
+            ),
+            SizedBox(
               height: height,
               width: width,
-              clipBehavior: Clip.hardEdge,
-              //TODO fix button radius issue
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(38), color: borderColor),
-            ),
-          ),
-          SizedBox(
-            height: height,
-            width: width,
-            child: TextButton(
-              onPressed: () {},
-              child: Text(
-                title,
-                style: TextStyle(
+              child: TextButton(
+                onPressed: () {},
+                child: FittedText(
                     fontFamily: 'DINNextRounded',
-                    fontSize: 46,
-                    color: fontColor),
-              ),
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(backgroundColor),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(38),
-                    side: BorderSide(width: 6, color: realBorderColor),
+                    title: title,
+                    fontColor: fontColor),
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(backgroundColor),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(38),
+                      side: BorderSide(width: 6, color: realBorderColor),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }
