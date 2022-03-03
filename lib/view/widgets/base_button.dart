@@ -1,4 +1,4 @@
-import 'package:duolingo_clone/view/widgets/fitted_text.dart';
+import 'package:duolingo_clone/view/widgets/click_tap.dart';
 import 'package:flutter/material.dart';
 
 class BaseButton extends StatelessWidget {
@@ -7,7 +7,7 @@ class BaseButton extends StatelessWidget {
       required this.backgroundColor,
       required this.title,
       required this.borderColor,
-      required this.realBorderColor,
+      required this.topColor,
       required this.fontColor,
       required this.onPressed})
       : super(key: key);
@@ -15,55 +15,57 @@ class BaseButton extends StatelessWidget {
   final Color borderColor;
   final Color backgroundColor;
   final String title;
-  final Color realBorderColor;
+  final Color topColor;
   final Color fontColor;
-  final Function onPressed;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       final width = constraints.maxWidth;
-      final height = width * 0.125;
+      final height = 60.0;
+      final innerHeight = height - 6;
 
-      return SizedBox(
-        width: width * 2,
-        height: height * 2,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              bottom: 20,
-              child: Container(
-                height: height,
-                width: width,
-                //TODO fix button radius issue
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(38),
-                    color: borderColor),
-              ),
-            ),
-            SizedBox(
-              height: height,
-              width: width,
-              child: TextButton(
-                onPressed: () {},
-                child: FittedText(
-                    fontFamily: 'DINNextRounded',
-                    title: title,
-                    fontColor: fontColor),
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(backgroundColor),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(38),
-                      side: BorderSide(width: 6, color: realBorderColor),
-                    ),
+      return ClickTap(
+        onPressed: onPressed,
+        child: SizedBox(
+          width: width,
+          height: height,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  height: innerHeight,
+                  // margin: const EdgeInsets.symmetric(horizontal: 2),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: topColor,
                   ),
                 ),
               ),
-            ),
-          ],
+              Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  height: innerHeight,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(17),
+                      color: borderColor),
+                ),
+              ),
+              Center(
+                child: Text(
+                  title.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'DINNextRound',
+                    fontSize: 20,
+                    color: fontColor,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       );
     });

@@ -7,3 +7,4 @@ const greenShadow = Color(0xff7AB934);
 const darkestBlue = Color(0xff141F25);
 const initialGrey = Color(0xff39464E);
 const fontGreen = Color(0xff94D238);
+const borderGrey = Color(0xff38464f);
